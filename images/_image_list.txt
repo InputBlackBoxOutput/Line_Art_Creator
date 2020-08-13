@@ -1,0 +1,16 @@
+apple.jpg
+baboon.jpg
+blobs.png
+butterfly.jpg
+cards.png
+cat.jpg
+chessboard.png
+fish.jpg
+flower.png
+fruits.jpg
+lena.jpg
+minions.jpg
+shapes.jpg
+shapes_overlaped.png
+starry_night.jpg
+thinning_diff.png
