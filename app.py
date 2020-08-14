@@ -25,18 +25,34 @@ bootstrap = Bootstrap(app)
 #------------------------------------------------------------------------------------------------
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import SubmitField
+from wtforms import SubmitField, SelectField
 
 class UploadForm(FlaskForm):
     photo = FileField(' ', validators=[FileAllowed(['jpg', 'png', 'jpeg'], u'Image only!'), FileRequired(u'An image is required!')])
+    alpha = SelectField('Alpha', choices=["Level -2", "Level -1", "Level 0", "Level 1", "Level 2"], default="Level 0")
     submit = SubmitField(u'Convert to line art')
 
+def getAlphaFromLevel(form):
+    if form.alpha.data == "Level -2":
+        alpha = 0 
+    elif form.alpha.data == "Level -1":
+        alpha = 30
+    elif form.alpha.data == "Level 0":
+        alpha = 60
+    elif form.alpha.data == "Level 1":
+        alpha = 90
+    elif form.alpha.data == "Level 2":
+        alpha = 120
+
+    return alpha
 #------------------------------------------------------------------------------------------------
 @app.route('/', methods=['GET','POST'])
 def run():
     form = UploadForm()
 
     if form.validate_on_submit():
+        alpha = getAlphaFromLevel(form)
+        
         print(form.photo.data)
 
         # It works do not touch it :-)
@@ -47,7 +63,7 @@ def run():
         cv_image = np.array(pil_image) 
         cv_image =cv_image[:, :, ::-1].copy() 
 
-        img = 255 - edges.detectEdges(cv_image, isFile=False)
+        img = 255 - edges.detectEdges(cv_image, alpha=alpha, isFile=False)
         # img = thinner.thinEdges(img)
 
         pil_img = Image.fromarray(img)

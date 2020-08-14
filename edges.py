@@ -22,6 +22,7 @@ except ImportError:
 #------------------------------------------------------------------------------------------------
 parser = argparse.ArgumentParser(description='Extracts edges from an image')
 parser.add_argument("-img", help="extract edges from this image")
+parser.add_argument("-alpha", help="use if very few or no edges  detected [Accepts values from 0 to 200]")
 args = parser.parse_args()
 
 #------------------------------------------------------------------------------------------------
@@ -37,7 +38,7 @@ def showImage(img, title="title"):
 	plt.show()
 		
 #------------------------------------------------------------------------------------------------
-def detectEdges(imgFile, isFile=False, show=False, download=False):
+def detectEdges(imgFile, alpha=60, isFile=False, show=False, download=False):
 	if isFile == True:
 		print(f"Extracting edges from: {imgFile}")
 		img = cv2.imread(imgFile)
@@ -55,7 +56,7 @@ def detectEdges(imgFile, isFile=False, show=False, download=False):
 		sys.exit()
 
 	# edges = cv2.Canny(bilateral, 60, 120, L2gradient=True)
-	edges = cv2.Canny(bilateral, 60, 120, L2gradient=False)
+	edges = cv2.Canny(bilateral, alpha, alpha+60, L2gradient=False)
 
 	if show == True:
 		showImage(gray, "Grayscale image")
@@ -73,14 +74,18 @@ def detectEdges(imgFile, isFile=False, show=False, download=False):
 if __name__ == "__main__":
 	# showImage(cv2.imread("images/cat.jpg"), "Original")
 	# detectEdges("images/cat.jpg", isFile=True, show=True)
-	edges = detectEdges(str(args.img), isFile=True)
+	if(args.alpha != None):
+		edges = detectEdges(str(args.img), int(args.alpha), isFile=True)
+	else:
+		edges = detectEdges(str(args.img), isFile=True)
 	thinner.thinEdges(edges, show=True)
 	
 	
 	# Loop through all images in the 'images' folder
-	# for each in os.listDir("images"):
-	#   edges = detectEdges(f"images/{each}", isFile=True)
-	#   thinEdges(edges, show=True)
+	# for each in os.listdir("images"):
+	# 	if each != "readme":
+	# 		edges = detectEdges(f"images/{each}", isFile=True)
+	# 		thinner.thinEdges(edges, show=True)
 
 #------------------------------------------------------------------------------------------------
 # EOF
