@@ -1,7 +1,15 @@
 # Line_Art_Creator
-Convert any image to line art using computer vision
+Convert any image to line art using image processing
 
-## Ignore if not a geek or a nerd
+## Sample images
+|Image|Line art|
+|--|--|
+|<img src="images/minions.jpg" height="300">|<img src="images/readme/line_minions.png" height="350">|
+|||
+|<img src="images/fish.jpg" height="250">|<img src="images/readme/line_fish.png" height="300">|
+
+
+## Ignore this section if not a geek or a nerd
 #### Steps involved in converting an image to line art
 
 1. Get the image from the user
@@ -19,8 +27,9 @@ Convert any image to line art using computer vision
 5. Apply bilateral filter to remove more noise from the image
 <img src="images/readme/4_bilateral_filtered.png" height="300">
 
-6. Apply Canny filter to detect edges <br> 
-**Note**:Edge detection is achieved mostly by the Sobel filter present in Canny filter <br>
+6. Use Canny edge detector to detect edges <br> 
+**Note**:Edge detection is achieved mostly by the Sobel filter present in Canny edge detector <br>
+A parameter named alpha is utilized to setup the hysteresis levels <br>
 <img src="images/readme/5_edges.png" height="300">
 
 7. Use Guo-Hall thinning for skeletonizing the image
@@ -32,4 +41,5 @@ Convert any image to line art using computer vision
 8. Invert the pixels in the image
 <img src="images/readme/7_inverted.png" height="300">
 
+#### After all the above image processing we get the lines of the line art
 ### Made with lots of ⏱️, 📚 and ☕ by InputBlackBoxOutput
