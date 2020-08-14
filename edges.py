@@ -58,7 +58,7 @@ def detectEdges(imgFile, isFile=False, show=False, download=False):
 	edges = cv2.Canny(bilateral, 60, 120, L2gradient=False)
 
 	if show == True:
-		showImage(img, "Original image")
+		showImage(gray, "Grayscale image")
 		showImage(gaussian, "Gaussian Blur")
 		showImage(median, "Median Blur")
 		showImage(bilateral, "Bilateral filtered image")
