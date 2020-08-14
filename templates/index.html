@@ -1,0 +1,82 @@
+{% extends "bootstrap/base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}	
+	<style type="text/css">
+		h1,h2 {
+			color:green;
+		}
+		
+		img {
+			border: 2px solid grey;
+			margin-right: 20px;
+		}
+
+		#oupt {
+			width:50%;
+		}
+
+		input, figcaption {
+			font-size: x-large;
+		}
+
+		#submit {
+			color: white;
+			background-color: rgb(40, 167, 69);
+			font-size: x-large;
+		}
+	</style>
+	
+	<div class="container-fluid">
+		<div class="col-md-12">
+			<h1>Convert an image to line art</h1>
+			<hr>
+			<table>
+				<tr>
+					<td>
+						<figure>
+							<figcaption>Image</figcaption>
+							<img src="static/cat.jpg">
+						</figure>
+					</td>
+					<td>
+						<figure>
+							<figcaption>Line art</figcaption>
+							<img src="static/cat_line_art.png">
+						</figure>
+					</td>
+				</tr>
+			</table>
+			<hr>
+			<h2>Upload an image</h2>
+			{% if form %}
+		   		<div>
+		   			{{ wtf.quick_form(form) }}
+		   		</div>
+		   	{% endif %}
+		</div>
+
+	   	<div class="col-md-12">
+	   		<hr>
+			{% if result == "True" %}
+				<h2> Line art created from the image:</h2>	
+	   		{% elif result == "False" %}
+	   			<h2>Please upload an image above</h2>
+	   		{% endif %}
+		</div>
+
+		<div class="col-md-12">
+			<img id="oupt" src="data:image/png;base64, {{encoded_photo | safe}}">
+		</div>
+		
+		<div class="col-md-12">
+			<hr>
+			<h4 >Made by 
+				<a href="https://github.com/InputBlackBoxOutput" target="_blank"> 
+				InputBlackBoxOutput
+				</a>
+			</h4>
+			<hr>
+		</div>
+	</div> 
+{% endblock %}

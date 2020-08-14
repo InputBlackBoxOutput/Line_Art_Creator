@@ -37,10 +37,13 @@ def showImage(img, title="title"):
 	plt.show()
 		
 #------------------------------------------------------------------------------------------------
-def detectEdges(imgFile, show=False, download=False):
-	print(f"Extracting edges from: {imgFile}")
-	img = cv2.imread(imgFile)
-	
+def detectEdges(imgFile, isFile=False, show=False, download=False):
+	if isFile == True:
+		print(f"Extracting edges from: {imgFile}")
+		img = cv2.imread(imgFile)
+	else:
+		img = imgFile
+
 	# Preprocessing image
 	try:	
 		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -54,14 +57,14 @@ def detectEdges(imgFile, show=False, download=False):
 	# edges = cv2.Canny(bilateral, 60, 120, L2gradient=True)
 	edges = cv2.Canny(bilateral, 60, 120, L2gradient=False)
 
-	if show:
+	if show == True:
 		showImage(img, "Original image")
 		showImage(gaussian, "Gaussian Blur")
 		showImage(median, "Median Blur")
 		showImage(bilateral, "Bilateral filtered image")
 		showImage(edges, "Edges")
 
-	if download:
+	if download == True:
 		downloadImage(edges, f"{imgFile.split('.')[0]}_edges.png")
 
 	return edges
@@ -69,15 +72,15 @@ def detectEdges(imgFile, show=False, download=False):
 #------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
 	# showImage(cv2.imread("images/cat.jpg"), "Original")
-	thinner.thinEdges(detectEdges(f"images/{args.img}"), show=True)
+	# detectEdges("images/cat.jpg", isFile=True, show=True)
+	edges = detectEdges(str(args.img), isFile=True)
+	thinner.thinEdges(edges, show=True)
 	
-
-	# detectEdges("images/cat.jpg", show=True)
 	
-
+	# Loop through all images in the 'images' folder
 	# for each in os.listDir("images"):
-	#   edges = detectEdges(f"images/{each}")
-	#   thinEdges(edges)
+	#   edges = detectEdges(f"images/{each}", isFile=True)
+	#   thinEdges(edges, show=True)
 
 #------------------------------------------------------------------------------------------------
 # EOF

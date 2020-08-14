@@ -71,7 +71,7 @@ def thinner(src):
 def thinEdges(edges, show=False):
 	thinned = thinner(edges)
 
-	if show:
+	if show == True:
 		plt.plot(), plt.imshow(255 - thinned, cmap="gray") # Image inverted
 		plt.title("O/P"), plt.xticks([]), plt.yticks([])
 		plt.show()
