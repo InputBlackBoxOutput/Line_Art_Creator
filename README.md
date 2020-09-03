@@ -8,7 +8,33 @@ Convert any image to line art using image processing
 |||
 |<img src="images/fish.jpg" height="250">|<img src="images/readme/line_fish.png" height="300">|
 
+## Installation
+This software does not require installation however the user should have Python (3.6 or above) installed.
 
+Python can be downloaded from www.python.org
+
+## Usage
+1. Install required modules </br>
+<code>pip install -r requirements.txt </code>
+
+2. This program can be used with a CLI or a Browser
+
+#### Using in a CLI
+Run the following command in command prompt/terminal </br>
+<code>python edges.py [-h] [-img IMG] [-alpha ALPHA]</code>
+
+|Option|Description|
+|--|--|
+|-img|extract edges from this image|
+|-alpha|use if very few or no edges detected [Accepts values from 0 to 200]|
+|-h, --help|show this help message and exit|
+
+#### Using in a Browser
+1. Run the following command in command prompt/terminal </br>
+<code>python app.py</code>
+
+1. Open your favorite browser & point to https://localhost:5000
+  
 ## Ignore this section if not a geek or a nerd
 #### Steps involved in converting an image to line art
 
@@ -42,4 +68,13 @@ A parameter named alpha is utilized to setup the hysteresis levels <br>
 <img src="images/readme/7_inverted.png" height="300">
 
 #### After all the above image processing we get the lines of the line art
+
+
+## Bonus
+The generated line art can be further converted to ASCII text art using an ANN
+
+Use the following website: https://tar-bin.github.io/DeepAAonWeb/
+
+Repository link on github: https://github.com/OsciiArt/DeepAA
+
 ### Made with lots of ⏱️, 📚 and ☕ by InputBlackBoxOutput
