@@ -1,7 +1,7 @@
 # Line Art Creator: Convert images to line art using openCV
 #
 # @file  : thinner.py
-# @brief : Provides thinning of edges using Guo-Hall thinning
+# @brief : Performs thinning of edges using Guo-Hall thinning
 # @author: Rutuparn Pawar <InputBlackBoxOutput>
 # @date_created : 12 Aug 2020
 
@@ -10,7 +10,7 @@ import sys
 try:
 	import itertools as it
 	import numpy as np
-	from matplotlib import pyplot as plt
+	import matplotlib.pyplot as plt
 except ImportError:
     print('Modules required by thinner.py not found')
     print('Use pip install -r requirements.txt to install modules')
